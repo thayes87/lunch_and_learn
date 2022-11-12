@@ -11,10 +11,11 @@ RSpec.describe 'recipe API request from FE' do
       expect(recipes).to be_a Hash
       
       recipes[:data].each do |recipe|
+        expect(recipe.keys).to eq([:id, :type, :attributes])
+        expect(recipe[:attributes].keys).to eq([:title, :url, :country, :image])
         expect(recipe[:id]).to eq(nil)
         expect(recipe[:type]).to eq("recipe")
         expect(recipe[:attributes]).to be_a Hash
-        expect(recipe[:attributes].keys).to eq([:title, :url, :country, :image])
       end
     end
   end
