@@ -1,10 +1,17 @@
 class CountryService
+  
+  def self.get_random_country
+    countries = get_countries
+    countries.sample[:name][:common]
+  end
+  
+  private 
+
   def self.get_countries
     response = conn.get('/v3.1/all')
     parse(response)
   end
 
-  private 
   def self.conn
     Faraday.new(url: 'https://restcountries.com')
   end
