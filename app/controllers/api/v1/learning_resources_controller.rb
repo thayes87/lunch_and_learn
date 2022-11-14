@@ -3,7 +3,11 @@ class Api::V1::LearningResourcesController < ApplicationController
     country = params[:format]
     video = VideoService.get_video(country)
     images = ImageService.get_images(country)
-
-    render json: LearningResourcesSerializer.results(country, video, images)
+    
+    if video[:items].blank? && images[:results].blank?
+      render json: LearningResourcesSerializer.no_result(country)
+    else
+      render json: LearningResourcesSerializer.results(country, video, images)
+    end
   end
 end
