@@ -9,14 +9,6 @@ RSpec.describe 'tourist sights API request from FE' do
 
       expect(response).to be_successful
       expect(tourist_sight).to be_a Hash
-      
-      # tourist_sights[:data].each do |tourist_sight|
-      #   expect(tourist_sight)keys).to eq([:id, :type, :attributes])
-      #   expect(tourist_sight[:attributes].keys).to eq([:title, :url, :country, :image])
-      #   expect(tourist_sight[:id]).to eq(nil)
-      #   expect(tourist_sight[:type]).to eq("tourist_sight))
-      #   expect(tourist_sight):attributes]).to be_a Hash
-      # end
     end
   end
 end
