@@ -1,9 +1,8 @@
 class TouristSightsService
 
   def self.get_tourist_sights(lat, long)
-    # response = conn.get("/v2/places?lon=#{long}&lat=#{lat}")
-    # resp = parse(response)
-
+    response = conn.get("/v2/places?filter=circle:#{long},#{lat},20000")
+    parse(response)
   end
 
   private
