@@ -22,7 +22,7 @@ RSpec.describe 'tourist sights API request from FE' do
   end
   #sad path
   context 'when no country is given' do
-    it 'returns recipes for a random country' do
+    xit 'returns recipes for a random country' do
       allow(CountryService).to receive(:get_random_country).and_return("Germany")
       get api_v1_tourist_sights_path()
 
