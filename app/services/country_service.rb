@@ -4,6 +4,12 @@ class CountryService
     countries = get_countries
     countries.sample[:name][:common]
   end
+
+  def self.get_latlong(country)
+    response = conn.get("/v3.1/name/#{country}")
+    resp = parse(response)
+    resp.first[:latlng]
+  end
   
   private 
 
