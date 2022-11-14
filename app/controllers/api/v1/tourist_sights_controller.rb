@@ -1,6 +1,6 @@
 class Api::V1::TouristSightsController < ApplicationController
   def index
-    country = params[:country] || params[:format]
+    country = find_country
     lat, long = find_latlong(country)
     tourist_sights = TouristSightsService.get_tourist_sights(lat, long)
     render json: TouristSightsSerializer.results(tourist_sights)
@@ -12,11 +12,11 @@ class Api::V1::TouristSightsController < ApplicationController
     CountryService.get_latlong(country)
   end
 
-  # def find_country
-  #   if params[:country].nil?
-  #     CountryService.get_random_country
-  #   else
-  #     params[:country]
-  #   end
-  # end
+  def find_country
+    if params[:country].nil?
+      CountryService.get_random_country
+    else
+      params[:country]
+    end
+  end
 end

@@ -4,7 +4,7 @@ RSpec.describe 'tourist sights API request from FE' do
   #happy path
   context 'when given a valid country' do 
     it 'returns tourists sights for the given country within a 20000 meter radius of the capital' do
-      get api_v1_tourist_sights_path("france")
+      get '/api/v1/tourist_sights?country=france'
 
       tourist_sights = JSON.parse(response.body, symbolize_names: true)
 
@@ -22,9 +22,9 @@ RSpec.describe 'tourist sights API request from FE' do
   end
   #sad path
   context 'when no country is given' do
-    xit 'returns recipes for a random country' do
+    it 'returns recipes for a random country' do
       allow(CountryService).to receive(:get_random_country).and_return("Germany")
-      get api_v1_tourist_sights_path()
+      get '/api/v1/tourist_sights'
 
       tourist_sights = JSON.parse(response.body, symbolize_names: true)
 
