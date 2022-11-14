@@ -6,4 +6,11 @@ RSpec.describe CountryService do
 
     expect(country).to be_a String
   end
-end 
+
+  it "returns the lattitude and longitude of a given country" do
+    country = "latvia"
+    lat_long = CountryService.get_latlong(country)
+
+    expect(lat_long).to be_an Array
+  end
+end
