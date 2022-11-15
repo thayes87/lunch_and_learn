@@ -1,6 +1,6 @@
 class Api::V1::LearningResourcesController < ApplicationController
   def index
-    country = params[:format]
+    country = params[:country]
     video = VideoService.get_video(country)
     images = ImageService.get_images(country)
     

@@ -13,10 +13,10 @@ class Api::V1::RecipesController < ApplicationController
   private
 
   def find_country
-    if params[:format].nil?
+    if params[:country].nil?
       CountryService.get_random_country
     else
-      params[:format]
+      params[:country]
     end
   end
 end
