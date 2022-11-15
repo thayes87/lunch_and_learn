@@ -25,4 +25,23 @@ RSpec.describe 'User request APIs' do
       expect(new_user[:data][:attributes]).to be_a Hash
     end
   end
+
+  context 'create a user - sad path' do
+    it 'returns a error message if the email already exists' do
+      user = create(:user, email: "tom@aol.com")
+      user_params = {
+        name: Faker::Name.name,
+        email: "tom@aol.com"
+      }
+
+      headers = { 'CONTENT_TYPE' => 'application/json' }
+      
+      post '/api/v1/users', headers: headers, params: JSON.generate(user_params)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+      expect(response.body[:data]).to be_an Array
+      expect(response.body[:data][0]).to eq("Invalid Email")
+    end
+  end
 end

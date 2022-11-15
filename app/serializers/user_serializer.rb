@@ -1,5 +1,5 @@
 class UserSerializer
-  include JSONAPI::Serializer
+  
   def self.new(user)
     {
       "data": {
@@ -11,6 +11,12 @@ class UserSerializer
           "api_key": user.api_key
         }
       }
+    }
+  end
+
+  def self.invalid_user
+    {
+      "data": ["Invalid Email"]
     }
   end
 end

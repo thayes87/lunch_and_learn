@@ -5,7 +5,7 @@ class Api::V1::UsersController < ApplicationController
       user.create_api_key
       render json: UserSerializer.new(user), status:201
     else
-      render status: 404
+      render json: UserSerializer.invalid_user, status:400
     end
   end
 
