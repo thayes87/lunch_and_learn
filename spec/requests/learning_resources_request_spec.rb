@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'learning resources API request from FE' do
   context 'when given a valid country' do
     it 'returns a learning resources for the given country' do
-      get api_v1_learning_resources_path("Canada")
-  
+      get '/api/v1/learning_resources?country=canada'
+      
       learning_resources = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
@@ -30,7 +30,7 @@ RSpec.describe 'learning resources API request from FE' do
       allow(ImageService).to receive(:get_images).and_return({
         "results" => []
       })
-      get api_v1_learning_resources_path("doesn't matter")
+      get '/api/v1/learning_resources?country=irrelevant'
 
       learning_resources = JSON.parse(response.body, symbolize_names: true)
 
@@ -40,7 +40,7 @@ RSpec.describe 'learning resources API request from FE' do
       expect(learning_resources[:data][:type]).to eq("learning_resource")
       expect(learning_resources[:data][:attributes]).to be_a Hash
       expect(learning_resources[:data][:attributes].keys).to eq([:country, :video, :images])
-      expect(learning_resources[:data][:attributes][:country]).to eq("doesn't matter")
+      expect(learning_resources[:data][:attributes][:country]).to eq("irrelevant")
       expect(learning_resources[:data][:attributes][:video]).to eq([])
       expect(learning_resources[:data][:attributes][:images]).to eq([])
     end
