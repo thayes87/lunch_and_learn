@@ -24,3 +24,4 @@ RSpec.describe 'Add Favorite recipes' do
       expect(recipe[:success]).to eq("Favorite added successfully")
     end
   end
+end
