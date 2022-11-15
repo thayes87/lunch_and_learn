@@ -38,10 +38,12 @@ RSpec.describe 'User request APIs' do
       
       post '/api/v1/users', headers: headers, params: JSON.generate(user_params)
 
+      new_user = JSON.parse(response.body, symbolize_names: true)
+
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
-      expect(response.body[:data]).to be_an Array
-      expect(response.body[:data][0]).to eq("Invalid Email")
+      expect(new_user[:data]).to be_an Array
+      expect(new_user[:data][0]).to eq("Invalid Email")
     end
   end
 end
