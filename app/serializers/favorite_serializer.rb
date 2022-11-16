@@ -27,4 +27,10 @@ class FavoriteSerializer
       end
    } 
   end
+
+  def self.no_favorites
+    {
+      "failure": "Unauthorized"
+    }
+  end
 end

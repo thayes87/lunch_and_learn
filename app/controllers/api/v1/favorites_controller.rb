@@ -11,11 +11,11 @@ class Api::V1::FavoritesController < ApplicationController
 
   def index
     user = User.find_by(api_key: params[:api_key])
-    favs = user.favorites
-    if !user.favorites.blank?
-      render json: FavoriteSerializer.get_favorites(favs), status: 201
+    if !user.blank?
+      favs = user.favorites
+      render json: FavoriteSerializer.get_favorites(favs), status: 200
     else
-      render json: FavoriteSerializer.no_favorites
+      render json: FavoriteSerializer.no_favorites, status: 401
     end
   end
 
