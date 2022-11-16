@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TouristSightsService do
+RSpec.describe TouristSightsService, :vcr do
   it "returns the tourist sights for the given country" do
     lat, long = [-41, 174]
 

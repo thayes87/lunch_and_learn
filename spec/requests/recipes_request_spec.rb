@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'recipe API request from FE' do
+RSpec.describe 'recipe API request from FE', :vcr do
   context 'when given a valid country' do 
     it 'returns recipes for the given country' do
       get '/api/v1/recipes?country=canada'

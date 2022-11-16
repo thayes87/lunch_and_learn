@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CountryService do
+RSpec.describe CountryService, :vcr do
   it "returns the common name of a random country" do
     country = CountryService.get_random_country
 
