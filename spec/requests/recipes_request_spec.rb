@@ -14,7 +14,7 @@ RSpec.describe 'recipe API request from FE', :vcr do
         expect(recipe.keys).to eq([:id, :type, :attributes])
         expect(recipe.keys.count).to eq(3)
         expect(recipe[:attributes].keys).to eq([:title, :url, :country, :image])
-        expect(recipe)
+        expect(recipe[:attributes].keys.count).to eq(4)
         expect(recipe[:id]).to eq(nil)
         expect(recipe[:type]).to eq("recipe")
         expect(recipe[:attributes]).to be_a Hash
@@ -30,7 +30,9 @@ RSpec.describe 'recipe API request from FE', :vcr do
         recipes = JSON.parse(response.body, symbolize_names: true)
 
         expect(response).to be_successful
+        expect(recipes).to be_a Hash
         expect(recipes[:data]).to eq([])
+        expect(recipes.keys.count).to eq(1)
       end 
     end
   end
