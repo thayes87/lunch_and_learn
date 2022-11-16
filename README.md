@@ -1,4 +1,7 @@
 # Lunch and Learn 
+### Built With
+
+ [![Rails][Rails.org]][Rails-url]
 
 *versions* 
 - Ruby 2.7.4p191
@@ -65,4 +68,40 @@ end
 
 *How to run the test suite*
 - Run `bundle exec rspec` in the terminal to run the entire test suite
+
+*Postman Testing and Results*
+- run `rails s` in the terminal
+- Open Postman and run the following requests with necessary params (or body):
+```
+GET localhost:3000/api/v1/recipes
+```
+```
+GET localhost:3000/api/v1/learning_resources
+```
+```
+POST localhost:3000/api/v1/users
+```
+```
+POST localhost:3000/api/v1/favorites
+```
+```
+GET localhost:3000/api/v1/favorites
+```
+*Project Link*
+
+[Lunch and Learn](https://backend.turing.edu/module3/projects/lunch_and_learn/)
+
+*Learning Goals*
+1. Expose an API that aggregates data from multiple external APIs
+2. Expose an API that requires an authentication token
+3. Expose an API for CRUD functionality
+4. Determine completion criteria based on the needs of other developers
+5. Test both API consumption and exposure, making use of at least one mocking tool (VCR, Webmock, etc).
+
+*Github Repository*
+- [Lunch and Learn](https://github.com/thayes87/lunch_and_learn)
+
+
+[Rails.org]: https://img.shields.io/badge/rails-%23CC0000.svg?style=for-the-badge&logo=ruby-on-rails&logoColor=white
+[Rails-url]: https://rubyonrails.org
 
