@@ -24,6 +24,8 @@ RSpec.describe 'Favorite recipes' do
       expect(response.status).to eq(201)
       expect(recipe).to be_a Hash
       expect(recipe.keys).to eq([:success])
+      expect(recipe.keys).to_not eq([:failure])
+      expect(recipe.keys.count).to eq(1)
       expect(recipe[:success]).to eq("Favorite added successfully")
     end
 
@@ -49,6 +51,8 @@ RSpec.describe 'Favorite recipes' do
       expect(response.status).to eq(400)
       expect(recipe).to be_a Hash
       expect(recipe.keys).to eq([:failure])
+      expect(recipe.keys).to_not eq([:success])
+      expect(recipe.keys.count).to eq(1)
       expect(recipe[:failure]).to eq("invalid key")
     end
   end
@@ -83,7 +87,9 @@ RSpec.describe 'Favorite recipes' do
 
       favorites[:data].each do |favorite|
         expect(favorite.keys).to eq([:id, :type, :attributes])
+        expect(favorite.keys.count).to eq(3)
         expect(favorite[:attributes].keys).to eq([:recipe_title, :recipe_link, :country, :created_at])
+        expect(favorite[:attributes].keys.count).to eq(4)
         expect(favorite[:id]).to be_a Integer
         expect(favorite[:type]).to eq("favorite")
         expect(favorite[:attributes]).to be_a Hash
@@ -114,6 +120,7 @@ RSpec.describe 'Favorite recipes' do
       expect(response).to_not be_successful
       expect(response.status).to eq(401)
       expect(favorites).to be_a Hash
+      expect(favorites.keys).to_not eq([:data])
     end
   end
 end
