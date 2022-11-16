@@ -16,6 +16,7 @@ RSpec.describe 'User request APIs' do
       new_user = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
+      expect(response.status).to eq(201)
       expect(new_user).to be_a Hash
 
       expect(new_user[:data].keys).to eq([:type, :id, :attributes])
