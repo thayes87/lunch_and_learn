@@ -18,9 +18,12 @@ RSpec.describe 'User request APIs' do
       expect(response).to be_successful
       expect(response.status).to eq(201)
       expect(new_user).to be_a Hash
+      expect(new_user.keys.count).to eq(1)
 
       expect(new_user[:data].keys).to eq([:type, :id, :attributes])
+      expect(new_user[:data].keys.count).to eq(3)
       expect(new_user[:data][:attributes].keys).to eq([:name, :email, :api_key])
+      expect(new_user[:data][:attributes].keys.count).to eq(3)
       expect(new_user[:data][:id]).to be_a Integer
       expect(new_user[:data][:type]).to eq("user")
       expect(new_user[:data][:attributes]).to be_a Hash
@@ -43,6 +46,7 @@ RSpec.describe 'User request APIs' do
 
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
+      expect(new_user.keys.count).to eq(1)
       expect(new_user[:data]).to be_an Array
       expect(new_user[:data][0]).to eq("Invalid Email")
     end
