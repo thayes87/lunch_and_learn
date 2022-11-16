@@ -10,10 +10,13 @@ RSpec.describe 'tourist sights API request from FE', :vcr do
 
       expect(response).to be_successful
       expect(tourist_sights).to be_a Hash
+      expect(tourist_sights.keys.count).to eq(1)
 
       tourist_sights[:data].each do |sight|
         expect(sight.keys). to eq([:id, :type, :attributes])
+        expect(sight.keys.count).to eq(3)
         expect(sight[:attributes].keys).to eq([:name, :address, :place_id])
+        expect(sight[:attributes].keys.count).to eq(3)
         expect(sight[:id]).to eq(nil)
         expect(sight[:type]).to eq("tourist_sight")
         expect(sight[:attributes]).to be_a Hash
@@ -31,10 +34,13 @@ RSpec.describe 'tourist sights API request from FE', :vcr do
       expect(CountryService).to have_received(:get_random_country)
       expect(response).to be_successful
       expect(tourist_sights).to be_a Hash
+      expect(tourist_sights.keys.count).to eq(1)
 
       tourist_sights[:data].each do |sight|
         expect(sight.keys). to eq([:id, :type, :attributes])
+        expect(sight.keys.count).to eq(3)
         expect(sight[:attributes].keys).to eq([:name, :address, :place_id])
+        expect(sight[:attributes].keys.count).to eq(3)
         expect(sight[:id]).to eq(nil)
         expect(sight[:type]).to eq("tourist_sight")
         expect(sight[:attributes]).to be_a Hash

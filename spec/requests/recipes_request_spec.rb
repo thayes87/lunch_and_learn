@@ -48,7 +48,6 @@ RSpec.describe 'recipe API request from FE', :vcr do
     end
   end
   
-
   context 'when no country is given' do
     it 'returns recipes for a random country' do
       allow(CountryService).to receive(:get_random_country)
