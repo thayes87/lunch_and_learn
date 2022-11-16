@@ -11,15 +11,19 @@ RSpec.describe 'learning resources API request from FE', :vcr do
       expect(learning_resources).to be_a Hash
 
       expect(learning_resources[:data].keys).to eq([:id, :type, :attributes])
+      expect(learning_resources[:data].keys.count).to eq(3)
       expect(learning_resources[:data][:attributes].keys).to eq([:country, :video, :images])
+      expect(learning_resources[:data][:attributes].keys.count).to eq(3)
       expect(learning_resources[:data][:id]).to eq(nil)
       expect(learning_resources[:data][:type]).to eq("learning_resource")
       expect(learning_resources[:data][:attributes]).to be_a Hash
       expect(learning_resources[:data][:attributes][:video]).to be_a Hash
       expect(learning_resources[:data][:attributes][:video].keys).to eq([:title, :youtube_video_id])
+      expect(learning_resources[:data][:attributes][:video].keys.count).to eq(2)
       expect(learning_resources[:data][:attributes][:images]).to be_a Array
       learning_resources[:data][:attributes][:images].each do |image|
         expect(image.keys).to eq([:alt_tag, :url])
+        expect(image.keys.count).to eq(2)
       end
     end
 
@@ -36,10 +40,13 @@ RSpec.describe 'learning resources API request from FE', :vcr do
 
       expect(response).to be_successful
       expect(learning_resources).to be_a Hash
+      
       expect(learning_resources[:data][:id]).to eq(nil)
+      expect(learning_resources[:data].keys.count).to eq(3)
       expect(learning_resources[:data][:type]).to eq("learning_resource")
       expect(learning_resources[:data][:attributes]).to be_a Hash
       expect(learning_resources[:data][:attributes].keys).to eq([:country, :video, :images])
+      expect(learning_resources[:data][:attributes].keys.count).to eq(3)
       expect(learning_resources[:data][:attributes][:country]).to eq("irrelevant")
       expect(learning_resources[:data][:attributes][:video]).to eq([])
       expect(learning_resources[:data][:attributes][:images]).to eq([])

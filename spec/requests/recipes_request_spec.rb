@@ -12,7 +12,9 @@ RSpec.describe 'recipe API request from FE', :vcr do
       
       recipes[:data].each do |recipe|
         expect(recipe.keys).to eq([:id, :type, :attributes])
+        expect(recipe.keys.count).to eq(3)
         expect(recipe[:attributes].keys).to eq([:title, :url, :country, :image])
+        expect(recipe)
         expect(recipe[:id]).to eq(nil)
         expect(recipe[:type]).to eq("recipe")
         expect(recipe[:attributes]).to be_a Hash
