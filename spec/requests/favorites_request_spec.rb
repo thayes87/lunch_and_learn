@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Add Favorite recipes' do
+RSpec.describe 'Favorite recipes' do
   context 'when the FE sends a Post request to add a recipe to a users favorite table' do
     it 'returns a successful response - happy path' do
       @user = create(:user)
@@ -50,6 +50,35 @@ RSpec.describe 'Add Favorite recipes' do
       expect(recipe).to be_a Hash
       expect(recipe.keys).to eq([:failure])
       expect(recipe[:failure]).to eq("invalid key")
+    end
+  end
+
+  context 'when the FE sends a GET request to return all favorite recipes for a user' do
+    it 'returns all favorites for that user based on the provided api key' do
+      user1 = create(:user)
+      user2 = create(:user)
+      user1.create_api_key
+      user2.create_api_key
+
+      recipe1 = create(:favorite, user_id: user1.id)
+      recipe2 = create(:favorite, user_id: user1.id)
+      recipe3 = create(:favorite, user_id: user1.id)
+      recipe4 = create(:favorite, user_id: user2.id)
+
+      
+      request_body = {
+        "api_key": "#{user1.api_key}"
+      }
+      
+      headers = { 'CONTENT_TYPE' => 'application/json' }
+      
+      get '/api/v1/favorites', headers: headers, params: request_body
+
+      favorites = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(response.status).to eq(201)
+
     end
   end
 end
