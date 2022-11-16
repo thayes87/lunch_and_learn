@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'learning resources API request from FE' do
+RSpec.describe 'learning resources API request from FE', :vcr do
   context 'when given a valid country' do
     it 'returns a learning resources for the given country' do
       get '/api/v1/learning_resources?country=canada'

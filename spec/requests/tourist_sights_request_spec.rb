@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe 'tourist sights API request from FE' do
+RSpec.describe 'tourist sights API request from FE', :vcr do
   #happy path
   context 'when given a valid country' do 
-    it 'returns tourists sights for the given country within a 20000 meter radius of the capital' do
+    it 'returns tourists sights for the given country within a 20000 meter radius of the capital', :vcr do
       get '/api/v1/tourist_sights?country=france'
 
       tourist_sights = JSON.parse(response.body, symbolize_names: true)
